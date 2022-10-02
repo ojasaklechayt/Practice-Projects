@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+</head>
+<body>
+    <select>
+    <option value="150x50">Small</option>
+    <option value="250x50">Medium</option>
+    <option value="650x50">Large</option>
+</select><br>
+<input type="text"><br>
+Color of Background:
+<input type="color" id="bck" value="#dddddd"><br>
+Color od Text:
+<input type="color" id="txt" value="red"><br>
+<img src="">
+<textare cols="50" rows="3"></textarea>
+    <script>
+        const sel = document.querySelector("select");
+const inpALL = document.querySelector("input");
+const myImg= document.querySelector("img");
+const txtArea = document.querySelector("textarea");
+
+sel.addEventListener("change",build);
+inpALL.forEach(function(item){
+    console.log(item);
+    item.addEventListener("change",build);
+})
+
+function clean(str){
+    return str.replace("#","")
+}
+
+function spacers(str){
+    return str.split(" ").join("+");
+}
+
+function build(e){
+    let i = {};
+    i.size = sel.value;
+    i.text = spacers(inpALL[0].value);
+    i.bgClr = clean(inpALL[1].value);
+    i.txtClr = clean(inpALL[2].value);
+    i.path = "http://via.placeholder.com/"+i.size+"/"+i.bgClr+"/"+i.texClr+"?text="+i.text;
+    myImg.src = i.path;
+    txtArea.value = i.path;
+    txtArea.select();
+    txtArea.focus();
+    document.execCommand("copy");
+}
+
+    </script>
+</body>
+</html>
